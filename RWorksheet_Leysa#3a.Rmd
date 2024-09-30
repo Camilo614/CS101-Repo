@@ -1,0 +1,149 @@
+---
+title: "RWorksheet_Leysa#3a"
+author: "Camilo Leysa"
+date: "2024-09-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Problem 1#
+a.
+```{r}
+LETTERS <- c("A", "B", "C", "D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
+letters <- c("a", "b", "c", "d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+LETTERS[c(1:11)]
+```
+b.
+```{r}
+LETTERS[seq(1,26,2)]
+```
+c.
+```{r}
+LETTERS[c(1,5,9,15,21)]
+```
+d.
+```{r}
+letters[c(22:26)]
+```
+e.
+```{r}
+letters[c(15:24)]
+```
+#Problem 2#
+a.
+```{r}
+city <- c("Tuguegarao City", "Manila", "Iloilo City", "Tacloban", "Samal Island", "Davao City")
+```
+b.
+```{r}
+temp <- c(42,39,34,34,30,27)
+```
+c.
+```{r}
+city_temp <- data.frame(city,temp)
+city_temp
+```
+d.
+```{r}
+names(city_temp) <- c("City", "Temperature")
+city_temp
+```
+e.
+```{r}
+str(city_temp)
+```
+f.
+```{r}
+answer_2 <- city_temp[3:4,]
+answer_2
+```
+g.
+```{r}
+max_temp <- max(city_temp$Temperature)
+max_temp
+min_temp <- min(city_temp$Temperature)
+min_temp
+```
+#Problem 2#
+a.
+```{r}
+matrix(c(1,2,3,4,5,6,7,8,11,12,13,14),nrow=3,ncol=4)
+```
+b.
+```{r}
+matrix <- matrix(c(1,2,3,4,5,6,7,8,11,12,13,14),nrow=3,ncol=4,)
+product <-matrix*2
+product
+```
+c.
+```{r}
+product[2,]
+```
+d.
+```{r}
+product[c(1,2), c(3:4)]
+```
+e.
+```{r}
+product[c(3), c(2:3)]
+```
+f.
+```{r}
+product[,4]
+```
+g.
+```{r}
+rownames(product) <- c("isa", "dalawa","tatlo")
+colnames(product) <- c("uno", "dos","tres", "quatro")
+product
+```
+h.
+```{r}
+reshaped_matrix <- matrix(matrix, nrow=6, ncol=2)
+reshaped_matrix
+```
+3.
+a.
+```{r}
+array_data <- array(c(1,2,3,4,5,6,7,8,9,0,3,4,5,1), c(2,4,2))
+array_data
+```
+b.
+```{r}
+dimension <- dim(array_data)
+dimension
+```
+c.
+```{r}
+rownames<- c("a","b")
+colnames<- c("A","B","C","D")
+third_dim_name <- c("1st-Dimensional Array","2nd Dimensional Array")
+dimnames(array_data) <- list(rownames,colnames,third_dim_name)
+array_data
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
