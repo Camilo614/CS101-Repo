@@ -81,6 +81,15 @@ f.
 fildata <- subset(hdata,Siblings.at.School >=5)
 fildata
 ```
+4.
+```{r}
+#This bar chart shows the sentiment of tweets per day within the range dates of 
+#July 14, 2020 to July 21,2020. The sentiment categories are represented by
+#"Negative", "Neutral", and "Positive", where each sentiment is represented by
+#different colored bars. As we can see in the graph, there is a huge spike of
+#negative tweets. In addition, on most days, negative sentiments appear to 
+#dominate over positive and neutral ones.
+```
 
 
 
