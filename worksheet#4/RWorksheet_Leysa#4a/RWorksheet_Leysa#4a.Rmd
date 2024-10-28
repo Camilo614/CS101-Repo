@@ -89,6 +89,84 @@ b.View the dataset. Write the R scripts and its result.
 View(Data)
 ```
 
+6. Full Search
+```{r}
+set.seed(123)
+chosen <- as.integer(readline(prompt = "Choose any number: "))
+print(paste("Your chosen number is: ",chosen))
+if (is.na(chosen)) {
+  print("Invalid input. Please enter a valid integer.")
+} else if(chosen <= 1 || chosen >= 50) {
+  print("The number selected is beyond the range of 1 to 50")
+} else if (chosen == 20) {
+  print("TRUE")
+} else {
+  print(paste("The chosen number is: ", chosen))
+}
+```
+7. Function that prints the minimum number of bills that must be paid
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000,500,200,100,50)
+  count <- 0
+  
+  for (bill in bills){
+    count <- count + (price %/% bill)
+    price <- price %% bill
+  }
+  
+  return(count)
+}
+
+snack_price <- as.numeric(readline(prompt = "Amount of Snack: ")) 
+print(paste("Minimum number of bills needed: ",min_bills(snack_price)))
+```
+8a. Math Scores
+```{r}
+students <- data.frame(Name= c("Annie", "Thea", "Steve", "Hanna"), Grade1= c(85,65,75,95), Grade2 = c(65,75,55,75), Grade3 = c(85,90,80,100), Grade4= c(100,90,85,90))
+students
+```
+
+8b. rowMean Function
+```{r}
+for (i in 1:nrow(students)) {
+  averagE <- mean(as.numeric(students[i,2:5]))
+    print(paste(students$Name[i],"'s average grade is",
+  round(averagE,2)))
+  }
+```
+
+8c. Identify tests with an average score below 80
+```{r}
+for (i in 2:5) {
+  test_ave <- mean(students[,i])
+  if (test_ave < 80) {
+    print(paste("The", colnames(students)[i], "test was difficult."))
+  }
+}
+```
+8d. Highest score in a semester.
+```{r}
+for (i in 1:nrow(students)) {
+  high_score <- FALSE
+  for (j in 2:5) {
+    if (students[i,j] > 90) {
+      high_score <- TRUE
+      break
+    }
+  }
+  if (high_score) {
+    print(paste(students$Name[i],"'s highest grade this semester is", max(as.numeric(students[i,2:5]))))
+  }
+}
+```
+
+
+
+
+
+
+
 
 
 
