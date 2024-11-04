@@ -1,0 +1,168 @@
+---
+title: "RWorksheet_Leysa#4c"
+author: "Camilo Leysa"
+date: "2024-11-04"
+output: pdf_document
+---
+
+1.
+a. Show your solution on how to import a csv file on your environment.
+```{r}
+library(ggplot2)
+mpg_data <- read.csv("mpg.csv")
+mpg_data
+```
+b. Which variables from the mpg dataset are categorical?
+```{r}
+#The variables that are categorical in the mpg dataset are manufacturer, model, year,
+#cyl, trans, drv, fl and class.
+```
+
+c. Which variables from the mpg dataset are continuous?
+```{r}
+#The variables that are continuous in the mpg dataset are displ, cty and hwy.
+```
+
+2. Manufacturer with the most models.
+```{r}
+library(dplyr)
+m_model <- mpg_data %>% group_by(manufacturer) %>% summarise(m_model = n_distinct(model))
+m_model
+```
+
+2a. Group the manufacturers and find the unique models.
+```{r}
+library(tidyr)
+uniqueness <- mpg_data %>% group_by(manufacturer) %>% summarise(unique_models = list(unique(model))) %>% unnest(unique_models)
+uniqueness
+```
+
+2b. Graph the result using plot() and ggplot().
+```{r}
+#plot
+#plot(m_model$manufacturer, m_model$m_model, xlab = "Manufacturer", ylab = "Unique Models")
+
+#ggplot2
+ggplot(m_model, aes(x=manufacturer, y=m_model)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Manufacturer", y= "Number of Unique Models")
+```
+
+2. Relationship of the model and the manufacturer.
+a.
+```{r}
+ggplot(mpg, aes(model, manufacturer)) + geom_point()
+```
+b. Useful or not?
+```{r}
+# Although the code is better because it shows a plot, however, I cannot understand 
+# the relationship of the 2 data. So, in order for the data to be informative, I will
+# filter the top models, use summarized data or choose other data that has a
+# significant relationship with other data.
+```
+
+3. Plotting the model and the year using ggplot() using top 20 observations.
+```{r}
+library(ggplot2)
+top_20 <- mpg_data %>% slice_head(n=20)
+ggplot(top_20, aes(x = model, y = year)) + geom_point() +theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Model", y = "Year" )
+```
+
+4. Using the %>% to group the model and the number of cars per model.
+```{r}
+car_per_model <- mpg_data %>% group_by(model) %>% summarise(count = n())
+car_per_model
+```
+
+4a. Plotting using geom_bar with 20 observations
+```{r}
+ggplot(car_per_model %>% slice_head(n = 20), aes(x = reorder(model, count), y = count)) + geom_bar(stat = "identity", fill = "steelblue") + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Model", y = "Number of Cars")
+```
+
+b. Plot using coord_flip().
+```{r}
+ggplot(car_per_model %>% slice_head(n = 20), aes(x = reorder(model, count), y = count)) + geom_bar(stat = "identity", fill = "purple") + coord_flip() + labs(x = "Model", y = "Number of Cars")
+```
+5. Plotting the relationship of cylinders and displacement (cyl and displ)
+```{r}
+ggplot(mpg_data, aes(x = cyl, y = displ, color = displ)) + geom_point() + labs(title = "Relationship between No. of Cylinders and Engine Displacement", x = "Numbers of Cylinders", y = "Engine Displacement")
+```
+
+6. Plotting the relationship between displ(engine displacement) and hwy (highway miles per gallon)
+```{r}
+ggplot(mpg_data, aes(x = displ, y = hwy)) + geom_point() + labs(x = "Engine Displacement (L)", y = "Highway Miles per Gallon")
+```
+
+6. Importing traffic.csv
+```{r}
+traffic<- read.csv("traffic.csv")
+traffic
+```
+6a. Numbers of observation
+```{r}
+print(dim(traffic))
+print(names(traffic))
+```
+
+6b. Subset the traffic dataset into junctions.
+```{r}
+junction_traffic <- subset(traffic, Junction == "your_junction_condition")
+junction_traffic
+```
+
+6c. Plot with geom_line()
+```{r}
+ggplot(traffic, aes(x = DateTime, y = Vehicles)) + geom_line() + labs(x = "Time", y = "Traffic Volume")
+```
+7.import alexa_file.xlsx
+```{r}
+library(readxl)
+alexa <- read_excel("alexa_file.xlsx")
+alexa
+```
+
+7a. Number of observations of alexa
+```{r}
+print(dim(alexa))
+```
+
+7b. Group the variations and get the total of each variations.
+```{r}
+total_variation <- alexa %>% group_by(variation) %>% summarise(total = n())
+total_variation
+```
+
+7c. Plotting the variations
+```{r}
+ggplot(total_variation, aes(x = variation, y = total)) + geom_bar(stat = "identity") + labs(x = "Variation", y = "Total Count")
+```
+
+7d. Plotting using geom_line.
+```{r}
+ggplot(alexa, aes(x = date, y = verified_reviews)) + geom_line() +labs(x = "Date", y = "Verified Reviews")
+```
+
+7e. Getting the relationship of Variations and Ratings.
+```{r}
+ggplot(alexa, aes(x = variation, y = rating)) + geom_boxplot() + labs(x = "Variation", y = "Rating")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
